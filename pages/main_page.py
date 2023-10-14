@@ -1,63 +1,49 @@
-import time
-from selenium.webdriver.support import expected_conditions as EC
-from locators.locators import MainPage, CartPage
+from pages.base_page import BasePage
+from locators.locators import MainPageLocators
 
 
+class MainPage(BasePage):
 
-def test_correct_main_page_title(driver, open_page, correct_login):
-    expected_title = "Swag Labs"
-    app_logo_element = driver.find_element(*MainPage.app_logo_element)
-    actual_title = app_logo_element.text
-    assert actual_title == expected_title, f"Expected Title '{expected_title}', BUT received '{actual_title}'"
+    def test_correct_main_page_title(self):
+        expected_title = "Swag Labs"
+        app_logo_element = self.driver.find_element(*MainPageLocators.app_logo_element)
+        actual_title = app_logo_element.text
+        assert actual_title == expected_title, f"Expected Title '{expected_title}', BUT received '{actual_title}'"
 
+    def test_displayed_bt_add_to_cart(self):
+        bt_add_to_cart = self.driver.find_element(*MainPageLocators.add_to_cart_bt)
+        assert bt_add_to_cart.is_enabled()
 
-def test_displayed_bt_add_to_cart(driver, open_page, correct_login):
-    bt_add_to_cart = driver.find_element(*MainPage.add_to_cart_bt)
-    assert bt_add_to_cart.is_enabled()
+    def test_check_click_shopping_cart(self):
+        self.driver.find_element(*MainPageLocators.shopping_cart).click()
+        assert self.driver.current_url == "https://www.saucedemo.com/cart.html", "INCORRECT RESULT"
 
+        shopping_cart_title = self.driver.find_element(*MainPageLocators.cart_tittle).text
+        assert shopping_cart_title == "Your Cart"
 
-def test_logout(driver, open_page, correct_login, wait):
-    driver.find_element(*MainPage.hamburger_menu).click()
-    wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "bm-item-list")))
-    # driver.implicitly_wait(2)
-    driver.find_element(By.ID, "logout_sidebar_link").click()
-    assert driver.current_url == "https://www.saucedemo.com/", "INCORRECT RESULT"
+    def sorted_az(self):
+        unsorted_list = self.driver.find_elements(*MainPageLocators.all_items)
+        unsorted_final = []
+        for option in unsorted_list:
+            unsorted_final.append(option.text)
+        unsorted_final.sort()
+        self.driver.find_element(*MainPageLocators.SORT_MENU_BUTTON).click()
+        self.driver.find_element(*MainPageLocators.sort_az).click()
+        self.element_is_present(MainPageLocators.sort_az)
+        sorted_list_az = self.driver.find_elements(*MainPageLocators.all_items)
+        sorted_az_final = []
+        for i in sorted_list_az:
+            sorted_az_final.append(i.text)
+        assert sorted_az_final == unsorted_final
 
+    def sorted_za(self):
+        unsorted_list = self.driver.find_elements(*MainPageLocators.all_items)
+        unsorted_final = [option.text for option in unsorted_list]
+        sorted_final = sorted(unsorted_final, reverse=True)
+        self.driver.find_element(*MainPageLocators.SORT_MENU_BUTTON).click()
+        self.driver.find_element(*MainPageLocators.sort_za).click()
+        self.element_is_present(MainPageLocators.sort_za)
+        sorted_list_za = self.driver.find_elements(*MainPageLocators.all_items)
+        sorted_za_final = [i.text for i in sorted_list_za]
+        assert sorted_za_final == sorted_final
 
-# def test_test(driver, open_page, correct_login):
-#     driver.find_element(*MainPage.hamburger_menu).click()
-#     # time.sleep(2)
-#     driver.find_element(By.ID, "logout_sidebar_link").click()
-
-
-def test_check_click_shopping_cart(driver, open_page, correct_login):
-    driver.find_element(*MainPage.shopping_cart).click()
-    assert driver.current_url == "https://www.saucedemo.com/cart.html", "INCORRECT RESULT"
-
-    # shopping_cart_title = driver.find_element(By.CLASS_NAME, "title").text
-    # assert shopping_cart_title == "Your Cart"
-
-
-"""TC check the availability of items in the cart"""
-
-
-def test_check_item_in_the_cart(driver, open_page, correct_login):
-    driver.find_element(*MainPage.add_to_cart_bt).click()
-    driver.find_element(*MainPage.shopping_cart).click()
-    product_name = driver.find_element(By.ID, "item_4_title_link")
-    if product_name:
-        print("Item add to cart")
-    else:
-        print("Item NOT FOUND")
-
-
-def test_delete_item_from_cart(driver, open_page, correct_login):
-    driver.find_element(*MainPage.shopping_cart).click()
-    cart_items = driver.find_element(By.ID, "cart_contents_container")
-    time.sleep(2)
-    item_name = driver.find_element(By.ID, "item_4_title_link")
-    remove_item = driver.find_element(*CartPage.remove_button).click()
-    # if len(cart_items) > 0:
-    #     print("Cart NOT EMPTY")
-    # else:
-    #     print("Item Removed from cart")
