@@ -27,4 +27,6 @@ class MainPageLocators:
 
 
 class CartPageLocators:
+    cart_item = (By.ID, "cart_contents_container")
+    item_4_title = (By.ID, "item_4_title_link")
     remove_button = (By.ID, "remove-sauce-labs-backpack")
