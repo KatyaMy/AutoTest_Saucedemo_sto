@@ -18,5 +18,3 @@ def test_remove_from_cart(driver, login_user):
     assert not cart_badge.text, "Иконка корзины содержит цифры: {}".format(cart_badge.text)
     assert cart_badge.is_displayed() is False
     # assert item.is_not_displayed()
-
-

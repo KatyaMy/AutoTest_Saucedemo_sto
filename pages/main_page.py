@@ -1,10 +1,10 @@
-from pages.base_page import BasePage
+from base_page import BasePage
 from locators.locators import MainPageLocators
 
 
 class MainPage(BasePage):
 
-    def test_correct_main_page_title(self):
+    def correct_main_page_title(self):
         expected_title = "Swag Labs"
         app_logo_element = self.driver.find_element(*MainPageLocators.app_logo_element)
         actual_title = app_logo_element.text

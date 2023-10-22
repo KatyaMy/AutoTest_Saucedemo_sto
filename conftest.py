@@ -1,7 +1,7 @@
 import pytest
 from selenium import webdriver
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
+from locators.locators import LoginPageLocators
 
 URL = 'https://www.saucedemo.com/'
 
@@ -25,7 +25,7 @@ def open_page(driver):
 
 
 @pytest.fixture(scope="function")
-def login_user(driver, open_page):
-    driver.find_element(By.XPATH, '//input[@data-test="username"]').send_keys("standard_user")
-    driver.find_element(By.XPATH, '//input[@data-test="password"]').send_keys("secret_sauce")
-    driver.find_element(By.XPATH, '//input[@data-test="login-button"]').click()
+def correct_user(driver, open_page):
+    driver.find_element(*LoginPageLocators.username_field).send_keys("standard_user")
+    driver.find_element(*LoginPageLocators.password_field).send_keys("secret_sauce")
+    driver.find_element(*LoginPageLocators.bt_login).click()
