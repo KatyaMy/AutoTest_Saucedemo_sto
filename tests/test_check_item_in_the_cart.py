@@ -1,8 +1,7 @@
-import time
 from selenium.webdriver.common.by import By
 
 
-def test_test(driver, correct_user):
+def test_check_item_in_the_cart(driver, correct_user):
     product_elements = driver.find_element(By.ID, "inventory_container")
     results = []
     for product in product_elements:

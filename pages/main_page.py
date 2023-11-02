@@ -10,11 +10,11 @@ class MainPage(BasePage):
         actual_title = app_logo_element.text
         assert actual_title == expected_title, f"Expected Title '{expected_title}', BUT received '{actual_title}'"
 
-    def test_displayed_bt_add_to_cart(self):
+    def displayed_bt_add_to_cart(self):
         bt_add_to_cart = self.driver.find_element(*MainPageLocators.add_to_cart_bt)
         assert bt_add_to_cart.is_enabled()
 
-    def test_check_click_shopping_cart(self):
+    def check_click_shopping_cart(self):
         self.driver.find_element(*MainPageLocators.shopping_cart).click()
         assert self.driver.current_url == "https://www.saucedemo.com/cart.html", "INCORRECT RESULT"
 

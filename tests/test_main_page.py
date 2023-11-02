@@ -9,9 +9,17 @@ class TestMainPage:
         page.correct_main_page_title()
 
     def test_displayed_bt_add_to_cart(self, driver, correct_user):
-        bt_add_to_cart = driver.find_element(*MainPageLocators.add_to_cart_bt)
-        assert bt_add_to_cart.is_enabled()
+        page = MainPage(driver)
+        page.displayed_bt_add_to_cart()
 
     def test_check_click_shopping_cart(self, driver, correct_user):
-        driver.find_element(*MainPageLocators.shopping_cart).click()
-        assert driver.current_url == "https://www.saucedemo.com/cart.html", "INCORRECT RESULT"
+        page = MainPage(driver)
+        page.check_click_shopping_cart()
+
+    def test_sorted_az(self, driver, correct_user):
+        page = MainPage(driver)
+        page.sorted_az()
+
+    def test_sorted_za(self, driver, correct_user):
+        page = MainPage(driver)
+        page.sorted_za()

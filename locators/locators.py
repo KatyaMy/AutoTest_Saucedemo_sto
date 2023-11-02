@@ -30,3 +30,8 @@ class CartPageLocators:
     cart_item = (By.ID, "cart_contents_container")
     item_4_title = (By.ID, "item_4_title_link")
     remove_button = (By.ID, "remove-sauce-labs-backpack")
+    add_to_cart_button = (By.XPATH, '//*[@id="add-to-cart-sauce-labs-backpack"]')
+    cart_button = (By.XPATH, '//*[@id="shopping_cart_container"]/a')
+    cart_bages = (By.XPATH, '//*[@id="shopping_cart_container"]/a/span')
+    cart_container = (By.ID, "shopping_cart_container")
+
