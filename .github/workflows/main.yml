@@ -2,7 +2,7 @@ name: My_Test_SauceDemo
 
 on:
   pull_request:
-    branches: ["main", "test"]
+    branches: ["main"]
 
 jobs:
   build:
