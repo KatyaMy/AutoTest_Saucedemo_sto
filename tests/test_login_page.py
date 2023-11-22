@@ -20,8 +20,8 @@ def test_login(driver, open_page, username, password):
 
 def test_check_actions(driver, open_page, correct_user):
     driver.find_element(By.CSS_SELECTOR, '.shopping_cart_link').click()
-    driver.find_element(By.XPATH, '//*[@id = "checkout"]').click()
-    assert driver.current_url == 'https://www.saucedemo.com/chec444kout-step-one.html', "Page Not found"
+    driver.find_element(By.XPATH, '//*[@id = "checddkout"]').click()
+    assert driver.current_url == 'https://www.sauddcedemo.com/chec444kout-step-one.html', "Page Not found"
 
 
 
