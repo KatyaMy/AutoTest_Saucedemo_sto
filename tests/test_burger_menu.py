@@ -7,10 +7,10 @@ class TestBurgerPage:
         page = HamburgerMenu(driver)
         page.logout_bt()
 
-    def test_check_about_bt(self, driver, correct_user):
+    def test_check_about_but(self, driver, correct_user):
         page = HamburgerMenu(driver)
         page.about_bt()
 
-    def test_check_reset_app_bt(self, driver, correct_user, wait):
+    def test_check_reset_app_but(self, driver, correct_user, wait):
         page = HamburgerMenu(driver)
         page.reset_app_bt()
