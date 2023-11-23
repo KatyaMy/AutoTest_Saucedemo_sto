@@ -23,9 +23,9 @@ jobs:
         pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         
-    - name: Run tests
+    - name: Start tests
       run: |
-        pytest -s -v
+        pytest -s -v --html=report.html
         
     - name: Загрузка отчета
       uses: actions/upload-artifact@v2
