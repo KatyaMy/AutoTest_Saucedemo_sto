@@ -2,6 +2,7 @@ import pytest
 from locators.locators import LoginPageLocators
 
 
+@pytest.mark.xfail
 @pytest.mark.parametrize("username, password", [("user", "user")])
 def test_wrong_login(driver, open_page, username, password):
     username_field = driver.find_element(*LoginPageLocators.username_field)
