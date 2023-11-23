@@ -26,3 +26,9 @@ jobs:
     - name: Run tests
       run: |
         pytest -s -v
+        
+    - name: Загрузка отчета
+      uses: actions/upload-artifact@v2
+      with:
+        name: test-report
+        path: report.html
