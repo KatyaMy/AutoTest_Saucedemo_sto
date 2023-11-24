@@ -20,7 +20,7 @@ jobs:
         
     - name: RUN TESTS
       run: |
-        pytest -s -v --html=report.html
+        pytest -s -v 
 
     # - name: Publish Test Results
     #   uses: EnricoMi/publish-unit-test-result-action@v2
