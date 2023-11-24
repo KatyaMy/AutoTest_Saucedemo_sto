@@ -23,11 +23,11 @@ jobs:
       run: |
         pytest -s -v --html=report.html
 
-    - name: Publish Test Results
-      uses: EnricoMi/publish-unit-test-result-action@v2
-      if: always()
-      with:
-        junit_files: "report.xml"
+    # - name: Publish Test Results
+    #   uses: EnricoMi/publish-unit-test-result-action@v2
+    #   if: always()
+    #   with:
+    #     junit_files: "report.xml"
         
     - name: Загрузка отчета
       uses: actions/upload-artifact@v2
