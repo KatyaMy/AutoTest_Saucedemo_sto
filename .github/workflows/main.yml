@@ -16,13 +16,6 @@ jobs:
         with:
           path: artifacts
 
-      - name: Publish Unit Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v1
-        with:
-          files: artifacts/**/*.xml
-
-      - uses: actions/checkout@v3
-
       - name: Set up Python 3.10
         uses: actions/setup-python@v3
         with:
@@ -34,9 +27,15 @@ jobs:
           pip install flake8 pytest
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         
-      - name: Start tests
+      - name: RUN TESTS
         run: |
           pytest -s -v --html=report.html
+
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          junit_files: "report.xml"
         
       - name: Загрузка отчета
         uses: actions/upload-artifact@v2
