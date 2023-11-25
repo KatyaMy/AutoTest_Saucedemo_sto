@@ -26,3 +26,9 @@ jobs:
           extra-black-options: ". -S"
           extra-mypy-options: ""
           extra-isort-options: ""
+          
+      - name: Загрузка отчета
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-report
+          path: report.html
